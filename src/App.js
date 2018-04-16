@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Clock from './component/Clock/index.jsx';
+import Clock from './component/Clock';
 import Test from './component/Test';
 import LoginControl from './component/LoginControl';
 
