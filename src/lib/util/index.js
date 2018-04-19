@@ -1,6 +1,17 @@
-import now from './now.js'
+import test from './test.js'
+import EDate from './EDate.js'
+
+
+var getTime = function () {
+    console.log(99999)
+}
+
+
+
 
 
 export default {
-    now
+    test,
+    EDate,
+    getTime
 }

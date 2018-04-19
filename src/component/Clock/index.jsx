@@ -1,41 +1,36 @@
-import React from 'react';
-import './Clock.css';
+import React from 'react'
+import './clock.css'
 
-import util from '../../lib/util';
+
 
 class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { date: new Date() };
-  }
+    constructor(props) {
+        super(props)
+        this.state = { date: new Date() }
+    }
 
-  componentDidMount() {
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        )
+    }
 
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
 
-    util.now()
+    tick() {
+        this.setState({
+            date: new Date()
+        })
+    }
 
-
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
-
-  render() {
-    return (
-      <div className="m-clock">{this.state.date.toLocaleTimeString()}</div>
-    );
-  }
+    render() {
+        return (
+            <div className="m-clock">{this.state.date.toLocaleTimeString()}</div>
+        )
+    }
 }
 
-export default Clock;
+export default Clock
