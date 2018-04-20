@@ -1,5 +1,4 @@
 import test from './test.js'
-import EDate from './EDate.js'
 
 
 var getTime = function () {
@@ -7,11 +6,7 @@ var getTime = function () {
 }
 
 
-
-
-
 export default {
     test,
-    EDate,
     getTime
 }

@@ -8,24 +8,15 @@ import LoginControl from './component/LoginControl'
 
 import util from './lib/util'
 
+
+
+import Extendate from './lib/extendate'
+
+
 class App extends Component {
 
     componentDidMount() {
-        // console.log(util)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        console.log((new Extendate()).toFormatString('yyyy-MM-dd HH:mm:ss.SSS 星期w 第q季度'))
 
 
 
