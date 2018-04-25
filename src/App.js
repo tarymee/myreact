@@ -2,25 +2,13 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
-import Clock from './component/Clock'
-import Test from './component/Test'
-import LoginControl from './component/LoginControl'
-
-import util from './lib/util'
-
-
-
-import Extendate from './lib/extendate'
-
+import Clock from './component/Clock/Clock'
+import Test from './component/Test/Test'
+import LoginControl from './component/LoginControl/LoginControl'
 
 class App extends Component {
 
     componentDidMount() {
-        console.log((new Extendate()).toFormatString('yyyy-MM-dd HH:mm:ss.SSS 星期w 第q季度'))
-
-
-
-
 
 
     }
@@ -34,7 +22,7 @@ class App extends Component {
                 </header>
                 <section>
                     <Clock />
-                    <Test name="khkjhkj" obj={{ name: "test" }} />
+                    <Test name="test" testObj={{ aaa: "aaa" }} />
                     <LoginControl />
                 </section>
             </div>
