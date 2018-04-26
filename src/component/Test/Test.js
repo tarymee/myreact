@@ -22,10 +22,9 @@ class Test extends React.Component {
         // console.log(id)
         // console.log(e)
         // console.log(this)
-        var that = this
         e.preventDefault()
-        that.setState({
-            clickCount: that.state.clickCount + 1
+        this.setState({
+            clickCount: this.state.clickCount + 1
         })
 
 
@@ -37,6 +36,72 @@ class Test extends React.Component {
         console.log(util.v2())
         // console.log(v1())
         // console.log(v2())
+
+        // 如何扩展 Create React App 的 Webpack 配置
+        // https://zhaozhiming.github.io/blog/2018/01/08/create-react-app-override-webpack-config/
+
+
+        // function fetchProgress(url, opts = {}, onProgress) {
+        //     return new Promise(funciton(resolve, reject) {
+        //         var xhr = new XMLHttpRequest()
+        //         xhr.open(opts.method || 'get', url)
+        //         for(var key in opts.headers || {}){
+        //             xhr.setRequestHeader(key, opts.headers[key]);
+        //         }
+
+        //         xhr.onload = e => resolve(e.target.responseText)
+        //         xhr.onerror = reject;
+        //         if (xhr.upload && onProgress) {
+        //             xhr.upload.onprogress = onProgress; //上传
+        //         }
+        //         if ('onprogerss' in xhr && onProgress) {
+        //             xhr.onprogress = onProgress; //下载
+        //         }
+        //         xhr.send(opts.body)
+        //     })
+        // }
+
+
+
+        // // fetch
+        // // https://segmentfault.com/a/1190000008484070
+        // fetch('/api/discover/new_index_v3', {
+        //     method: 'POST',
+        //     credentials: 'include',
+        //     headers: new Headers({
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/x-www-form-urlencoded' // 指定提交方式为表单提交
+        //     }),
+        //     body: new URLSearchParams({
+        //         user_id: '',
+        //         auth_token: '',
+        //         aaa: [
+        //             {
+        //                 bbb: '5463546',
+        //                 ccc: '5463546'
+        //             },
+        //             {
+        //                 bbb: '5463546',
+        //                 ccc: '5463546'
+        //             }
+        //         ],
+        //         hululi_client_system: 'h5',
+        //         hululi_version: '2.2'
+        //     }).toString()
+        // }).then((res) => {
+        //     console.log(res)
+        //     // console.log(res.body.getReader())
+        //     // return res.text()
+        //     return res.json()
+        // }).then((res) => {
+        //     console.log(res)
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+
+
+
+
     }
 
     componentWillUnmount() {
