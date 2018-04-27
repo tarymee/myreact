@@ -3,7 +3,7 @@ import './test.css';
 // import { test } from '../../lib/util'
 // import util, { v1, v2 } from '../../lib/util'
 import * as util from '../../lib/util'
-
+import { fetchRequest, Ajax} from '../../lib/fetch'
 
 class Test extends React.Component {
     constructor(props) {
@@ -41,6 +41,100 @@ class Test extends React.Component {
         // https://zhaozhiming.github.io/blog/2018/01/08/create-react-app-override-webpack-config/
 
 
+
+
+        // Ajax({
+        //     type: 'POST',
+        //     url: '/v1/captchas',
+        //     dataType: 'json',
+        //     data: {},
+        //     success: function (res, xhr) {
+        //         if (res) {
+        //             console.log(res)
+        //             console.log(xhr)
+        //         }
+        //     }
+        // })
+
+        Ajax({
+            type: 'GET',
+            url: 'https://www.ba5525idu.com/',
+            dataType: 'json',
+            data: {},
+            success: function (res, xhr) {
+                console.log(res)
+                console.log(xhr)
+            },
+            error: function (res, xhr) {
+                console.log(res)
+                console.log(xhr)
+            },
+        })
+
+        // fetchRequest({
+        //     type: 'POST',
+        //     url: '/v1/captchas',
+        //     dataType: 'json',
+        //     data: {}
+        // }).then((res) => {
+        //     if (res) {
+        //         console.log(res)
+        //     }
+        // })
+
+        // fetchRequest({
+        //     type: 'GET',
+        //     url: '/v1/cities',
+        //     dataType: 'json',
+        //     data: {
+        //         type: 'hot'
+        //     }
+        // }).then((res) => {
+        //     if (res) {
+        //         console.log(res)
+        //     }
+        // })
+
+        // fetchRequest({
+        //     type: 'GET',
+        //     url: '/',
+        //     dataType: 'text',
+        //     data: {}
+        // }).then((res) => {
+        //     if (res) {
+        //         console.log(res)
+        //     }
+        // })
+
+
+
+
+
+
+
+
+
+
+
+
+        // fetch('/v1/captchas999', {}, 'POST', 'ajax').then((res) => {
+        //     console.log(555555555555555)
+        //     console.log(res)
+        // })
+
+
+        // fetch('http://www.hululi.cn/api/discover/new_index_v3', {
+        //     hululi_client_system: 'h5',
+        //     hululi_version: '2.2'
+        // }, 'POST', 'fetch').then((res) => {
+        //     console.log(555555555555555)
+        //     console.log(res)
+        // }).catch((error) => {
+        //     console.error('error')
+        //     console.error(error)
+        // })
+
+
         // function fetchProgress(url, opts = {}, onProgress) {
         //     return new Promise(funciton(resolve, reject) {
         //         var xhr = new XMLHttpRequest()
@@ -60,46 +154,6 @@ class Test extends React.Component {
         //         xhr.send(opts.body)
         //     })
         // }
-
-
-
-        // // fetch
-        // // https://segmentfault.com/a/1190000008484070
-        // fetch('/api/discover/new_index_v3', {
-        //     method: 'POST',
-        //     credentials: 'include',
-        //     headers: new Headers({
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/x-www-form-urlencoded' // 指定提交方式为表单提交
-        //     }),
-        //     body: new URLSearchParams({
-        //         user_id: '',
-        //         auth_token: '',
-        //         aaa: [
-        //             {
-        //                 bbb: '5463546',
-        //                 ccc: '5463546'
-        //             },
-        //             {
-        //                 bbb: '5463546',
-        //                 ccc: '5463546'
-        //             }
-        //         ],
-        //         hululi_client_system: 'h5',
-        //         hululi_version: '2.2'
-        //     }).toString()
-        // }).then((res) => {
-        //     console.log(res)
-        //     // console.log(res.body.getReader())
-        //     // return res.text()
-        //     return res.json()
-        // }).then((res) => {
-        //     console.log(res)
-        // }).catch((error) => {
-        //     console.log(error)
-        // })
-
-
 
 
     }
