@@ -1,4 +1,3 @@
-
 // 拼接字符串 a=1&b=2
 function serialize(obj) {
     var ret = []
@@ -8,15 +7,16 @@ function serialize(obj) {
     return ret.join('&');
 }
 
-
 var Ajax = function (option) {
     option = (typeof option === 'object') ? option : {}
     option.type = option.type ? option.type.toUpperCase() : 'GET'
     option.url = option.url || ''
     option.data = option.data || {}
+    option.headers = option.headers || {}
     option.dataType = option.dataType || 'text'
     option.success = option.success || function () { }
     option.error = option.error || function () { }
+    option.timeout = option.timeout || 10000 // 默认10秒
 
     // get方法 拼接字符串 ?a=1&b=2
     if (option.type === 'GET') {
@@ -29,36 +29,95 @@ var Ajax = function (option) {
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new window.ActiveXObject('Microsoft.XMLHTTP')
     xhr.open(option.type, option.url, true)
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-    xhr.send(option.type === 'GET' ? '' : serialize(option.data))
+    for (var key in option.headers) {
+        xhr.setRequestHeader(key, option.headers[key])
+    }
 
+    // 超时
+    var isTimeout = false
+    var timeout_fn = setTimeout(function () {
+        isTimeout = true
+        xhr.abort()
+    }, option.timeout)
+
+    xhr.onabort = function () {
+        isTimeout = true
+    } 
+
+    xhr.send(option.type === 'GET' ? '' : serialize(option.data))
     xhr.onreadystatechange = function () {
+        // 如果超时则中止请求
+        if (isTimeout) return
+        // 取消等待的超时
+        clearTimeout(timeout_fn)
+
         if (xhr.readyState === 4) {
             if (xhr.status === 200 || xhr.status === 304) {
                 let response = xhr.responseText
                 if (option.dataType === 'text') {
-                    option.success.call(this, response, xhr)
+                    option.success.call(option, response, xhr)
                 } else if (option.dataType === 'json') {
                     try {
                         response = JSON.parse(response)
-                        option.success.call(this, response, xhr)
+                        option.success.call(option, response, xhr)
                     } catch (error) {
-                        // console.error('ajax return not json')
-                        option.error.call(this, null, xhr)
+                        option.error.call(option, xhr, error)
                     }
                 } else {
-                    option.success.call(this, response, xhr)
+                    option.success.call(option, response, xhr)
                 }
             } else {
-                option.error.call(this, null, xhr)
+                option.error.call(option, xhr, 'error')
             }
         }
     }
-
+    return xhr
 }
 
 
+// Ajax({
+//     type: 'POST',
+//     url: '/v1/captchas',
+//     dataType: 'json',
+//     data: {},
+//     success: function (res, xhr, textStatus) {
+//         console.error(this)
+//         // console.log(res)
+//         console.log(xhr)
+//         // console.log(textStatus)
+//     },
+//     error: function (xhr, textStatus, error) {
+//         console.error(this)
+//         console.error(xhr)
+//         console.error(textStatus)
+//         console.error(error)
+//     }
+// })
 
+var a = Ajax({
+    type: 'POST',
+    url: 'http://www.hululi.cn/api/discover/new_index_v3',
+    dataType: 'json',
+    timeout: 10,
+    data: {
+        hululi_client_system: 'h5',
+        hululi_version: '2.2'
+    },
+    success: function (res, xhr, textStatus) {
+        // console.error(this)
+        // console.log(res)
+        console.log(xhr)
+        // console.log(textStatus)
+    },
+    error: function (xhr, textStatus, error) {
+        // console.error(this)
+        console.error(xhr)
+        console.error(textStatus)
+        console.error(error)
+    }
+})
 
+// a.abort()
 
 
 
@@ -121,11 +180,72 @@ var fetchRequest = (option = {}) => {
         })
     }
 }
+// fetchRequest({
+//     type: 'POST',
+//     url: '/v1/captchas',
+//     dataType: 'json',
+//     data: {}
+// }).then((res) => {
+//     if (res) {
+//         console.log(res)
+//     }
+// })
+
+// fetchRequest({
+//     type: 'GET',
+//     url: '/v1/cities',
+//     dataType: 'json',
+//     data: {
+//         type: 'hot'
+//     }
+// }).then((res) => {
+//     if (res) {
+//         console.log(res)
+//     }
+// })
+
+// fetchRequest({
+//     type: 'GET',
+//     url: '/',
+//     dataType: 'text',
+//     data: {}
+// }).then((res) => {
+//     if (res) {
+//         console.log(res)
+//     }
+// })
+
+        // function fetchProgress(url, opts = {}, onProgress) {
+        //     return new Promise(funciton(resolve, reject) {
+        //         var xhr = new XMLHttpRequest()
+        //         xhr.open(opts.method || 'get', url)
+        //         for(var key in opts.headers || {}){
+        //             xhr.setRequestHeader(key, opts.headers[key]);
+        //         }
+
+        //         xhr.onload = e => resolve(e.target.responseText)
+        //         xhr.onerror = reject;
+        //         if (xhr.upload && onProgress) {
+        //             xhr.upload.onprogress = onProgress; //上传
+        //         }
+        //         if ('onprogerss' in xhr && onProgress) {
+        //             xhr.onprogress = onProgress; //下载
+        //         }
+        //         xhr.send(opts.body)
+        //     })
+        // }
 
 
-
-
-
+        // fetch('http://www.hululi.cn/api/discover/new_index_v3', {
+        //     hululi_client_system: 'h5',
+        //     hululi_version: '2.2'
+        // }, 'POST', 'fetch').then((res) => {
+        //     console.log(555555555555555)
+        //     console.log(res)
+        // }).catch((error) => {
+        //     console.error('error')
+        //     console.error(error)
+        // })
 
 export {
     fetchRequest,
