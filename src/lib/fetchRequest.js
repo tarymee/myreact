@@ -2,15 +2,16 @@
 // https://segmentfault.com/p/1210000009184668/read
 // https://github.com/camsong/fetch-jsonp
 // https://github.com/camsong/fetch-ie8
-var fetchRequest = (option = {}) => {
+let fetchRequest = (option = {}) => {
     option.type = option.type.toUpperCase() || 'GET'
     option.url = option.url || ''
     option.data = option.data || {}
     option.dataType = option.dataType || 'text'
+    option.timeout = option.timeout || 10000
 
     // 拼接字符串 a=1&b=2
-    function serialize(obj) {
-        var ret = []
+    let serialize = function (obj) {
+        let ret = []
         Object.keys(obj).forEach(key => {
             ret.push('' + key + '=' + obj[key]);
         })
@@ -41,7 +42,14 @@ var fetchRequest = (option = {}) => {
             requestConfig.body = JSON.stringify(option.data)
         }
 
-        return fetch(option.url, requestConfig).then((response) => {
+        // 超时
+        let timeoutPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(new Error('Request Timeout'))
+            }, option.timeout)
+        })
+
+        let fetchPromise = fetch(option.url, requestConfig).then((response) => {
             if (response.status === 200 || response.status === 304) {
                 return response
             }
@@ -57,25 +65,51 @@ var fetchRequest = (option = {}) => {
                 return response.text()
             }
         }).then((response) => {
-            console.log('fetch success')
+            return response
+        })
+
+        return Promise.race([
+            fetchPromise,
+            timeoutPromise
+        ]).then((response) => {
             return response
         }).catch((error) => {
             // 如果不想要统一处理 则去掉catch 但是外面就需要加catch
-            console.error('fetch fail')
             console.error(error)
         })
+
     }
 }
+
 // fetchRequest({
 //     type: 'POST',
 //     url: '/v1/captchas',
 //     dataType: 'json',
 //     data: {}
 // }).then((res) => {
-//     if (res) {
-//         console.log(res)
-//     }
+//     console.log(res)
+//     return fetchRequest({
+//         type: 'GET',
+//         url: '/v1/cities',
+//         dataType: 'json',
+//         data: {
+//             type: 'hot'
+//         }
+//     })
+// }).then((res) => {
+//     console.log(res)
+//     return fetchRequest({
+//         type: 'GET',
+//         url: '/',
+//         dataType: 'text',
+//         data: {}
+//     })
+// }).then((res) => {
+//     console.log(res)
 // })
+
+
+
 
 // fetchRequest({
 //     type: 'GET',
@@ -85,9 +119,7 @@ var fetchRequest = (option = {}) => {
 //         type: 'hot'
 //     }
 // }).then((res) => {
-//     if (res) {
-//         console.log(res)
-//     }
+//     console.log(res)
 // })
 
 // fetchRequest({
@@ -96,41 +128,11 @@ var fetchRequest = (option = {}) => {
 //     dataType: 'text',
 //     data: {}
 // }).then((res) => {
-//     if (res) {
-//         console.log(res)
-//     }
+//     console.log(res)
 // })
 
-        // function fetchProgress(url, opts = {}, onProgress) {
-        //     return new Promise(funciton(resolve, reject) {
-        //         var xhr = new XMLHttpRequest()
-        //         xhr.open(opts.method || 'get', url)
-        //         for(var key in opts.headers || {}){
-        //             xhr.setRequestHeader(key, opts.headers[key]);
-        //         }
-
-        //         xhr.onload = e => resolve(e.target.responseText)
-        //         xhr.onerror = reject;
-        //         if (xhr.upload && onProgress) {
-        //             xhr.upload.onprogress = onProgress; //上传
-        //         }
-        //         if ('onprogerss' in xhr && onProgress) {
-        //             xhr.onprogress = onProgress; //下载
-        //         }
-        //         xhr.send(opts.body)
-        //     })
-        // }
 
 
-        // fetch('http://www.hululi.cn/api/discover/new_index_v3', {
-        //     hululi_client_system: 'h5',
-        //     hululi_version: '2.2'
-        // }, 'POST', 'fetch').then((res) => {
-        //     console.log(555555555555555)
-        //     console.log(res)
-        // }).catch((error) => {
-        //     console.error('error')
-        //     console.error(error)
-        // })
+
 
 export default fetchRequest
