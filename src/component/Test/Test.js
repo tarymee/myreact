@@ -3,7 +3,7 @@ import './test.css';
 // import { test } from '../../lib/util'
 // import util, { v1, v2 } from '../../lib/util'
 import * as util from '../../lib/util'
-import { fetchRequest, Ajax } from '../../lib/fetch'
+import fetchRequest from '../../lib/fetchRequest'
 
 class Test extends React.Component {
     constructor(props) {
