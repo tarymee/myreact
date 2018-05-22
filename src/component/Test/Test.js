@@ -2,7 +2,9 @@ import React from 'react';
 import './test.css';
 
 
-// import fetchRequest from '../../lib/fetchRequest'
+import fetchRequest from '../../lib/fetchRequest'
+console.log(fetchRequest)
+// import fetch2 from '../../lib/fetch'
 
 class Test extends React.Component {
     constructor(props) {
@@ -36,12 +38,15 @@ class Test extends React.Component {
 
 
 
+        // var a = function () {
+        //     return fetch2('/v1/cities', {
+        //         type: 'hot'
+        //     })
+        // }
 
-
-
-
-
-
+        // a().then((res) => {
+        //     console.log(res)
+        // })
 
 
 
