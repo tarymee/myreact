@@ -88,9 +88,9 @@ let fetchRequest = (option = {}) => {
     let serialize = function (obj) {
         let ret = []
         Object.keys(obj).forEach(key => {
-            ret.push('' + key + '=' + obj[key]);
+            ret.push('' + key + '=' + obj[key])
         })
-        return ret.join('&');
+        return ret.join('&')
     }
 
     // get方法 拼接字符串 ?a=1&b=2
@@ -110,7 +110,7 @@ let fetchRequest = (option = {}) => {
             },
             mode: 'cors',
             cache: 'default',
-            method: option.type,
+            method: option.type
         }
 
         if (option.type === 'POST') {
