@@ -1,7 +1,4 @@
 /**
-
-
-
 var a = ajax({
     type: 'GET',
     url: '/',
@@ -22,7 +19,6 @@ var a = ajax({
 // 取消
 a.abort()
 
-
 ajax({
     type: 'POST',
     url: 'http://www.hululi.cn/api/discover/new_index_v3',
@@ -42,9 +38,6 @@ ajax({
         console.error(error)
     }
 })
-
-
-
  */
 var ajax = function (option) {
     option = (typeof option === 'object') ? option : {}
@@ -122,6 +115,5 @@ var ajax = function (option) {
     }
     return xhr
 }
-
 
 export default ajax
