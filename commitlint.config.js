@@ -10,7 +10,7 @@ module.exports = {
             'never',
             [
                 'person',
-                'a',
+                '',
                 'b'
             ]
         ],
