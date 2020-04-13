@@ -7,7 +7,7 @@ module.exports = {
         'scope-case': [2, 'always', 'lower-case'],
         'scope-enum': [
             2,
-            'never',
+            'always',
             [
                 'person',
                 '',
