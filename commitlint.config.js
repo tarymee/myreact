@@ -9,9 +9,9 @@ module.exports = {
             2,
             'always',
             [
-                'person',
-                '',
-                'b'
+                '自测',
+                '旗舰版',
+                '企业版'
             ]
         ],
         'subject-case': [
