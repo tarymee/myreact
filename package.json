@@ -6,7 +6,8 @@
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "test1": "node test1.js"
   },
   "proxy": "http://cangdu.org:8001",
   "scripts": {
@@ -24,7 +25,7 @@
   },
   "husky": {
     "hooks": {
-      "precommit": "node test1.js",
+      "pre-commit": "test1",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
