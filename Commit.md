@@ -38,7 +38,10 @@ chore: 构建工程或辅助工具的变动
 部署方式可参考: https://www.jianshu.com/p/8efa36c5dfd4
 
 我已在 WebApp容器包 和 5个引擎包 的每个分支都部署了，直接安装即可使用。
-注意：husky 要求 Node >= 10 and Git >= 2.13.0，使用前请确认本机版本号。
+
+**注意：**
++ husky 要求 Node >= 10 and Git >= 2.13.0，使用前请确认本机版本号。
++ 一定要使用 npm 安装 husky，用 yarn 安装依赖，不会触发 husky pre-commit 钩子命令。
 ```sh
 # 安装
 npm i
@@ -54,9 +57,7 @@ husky > commit-msg (node v12.14.0)
 ✖   found 2 problems, 0 warnings
 
 git commit -am 'fix(旗舰版): 【832】修复了xxx的bug'
-husky > npm run -s commitmsg
-⧗   input: fix: lint on commitmsg
-✔   found 0 problems, 0 warnings
+husky > commit-msg (node v12.14.0)
 ```
 
 
