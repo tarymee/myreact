@@ -45,6 +45,14 @@ npm i
 
 # 文件变动 提交信息
 git add .
+
+git commit -am '11'
+husky > commit-msg (node v12.14.0)
+⧗   input: 11
+✖   subject may not be empty [subject-empty]
+✖   type may not be empty [type-empty]
+✖   found 2 problems, 0 warnings
+
 git commit -am 'fix(旗舰版): 【832】修复了xxx的bug'
 husky > npm run -s commitmsg
 ⧗   input: fix: lint on commitmsg
