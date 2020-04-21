@@ -41,7 +41,7 @@ chore: 构建工程或辅助工具的变动
 
 **注意：**
 + husky 要求 Node >= 10 and Git >= 2.13.0，使用前请确认本机版本号。
-+ 一定要使用 npm 安装 husky，用 yarn 安装依赖，不会触发 husky pre-commit 钩子命令。
+
 ```sh
 # 安装
 npm i
