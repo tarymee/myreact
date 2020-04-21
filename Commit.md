@@ -93,6 +93,6 @@ git config commit.template ~/.gittemplate
 # 看看是否会自动带出git模版 如果有表示成功
 ```
 
-2、使用输入法的自定义短语功能，自定义快捷键，把上面的git模版copy进去，使用时键入快捷键自动带出模版。
+2、**推荐使用输入法的自定义短语功能**，配置简单，自定义快捷键，把上面的git模版copy进去，使用时键入快捷键自动带出模版。
 
-3、使用 VScode 的 Snippets 代码片段功能，自定义快捷键，把上面的git模版copy进去，使用时键入快捷键自动带出模版，编辑好之后再粘贴到 Sourcetree 的 commit 编辑框。
+3、或者也可使用 VScode 的 Snippets 代码片段功能，同样也是自定义快捷键带出git模版。
