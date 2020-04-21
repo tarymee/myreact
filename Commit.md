@@ -46,9 +46,10 @@ chore: 构建工程或辅助工具的变动
 # 安装
 npm i
 
-# 文件变动 提交信息
+# 提交文件到暂存区
 git add .
 
+# 提交到版本库 格式错误 提交失败
 git commit -am '11'
 husky > commit-msg (node v12.14.0)
 ⧗   input: 11
@@ -56,13 +57,14 @@ husky > commit-msg (node v12.14.0)
 ✖   type may not be empty [type-empty]
 ✖   found 2 problems, 0 warnings
 
+# 提交到版本库 格式正确 提交成功
 git commit -am 'fix(旗舰版): 【832】修复了xxx的bug'
 husky > commit-msg (node v12.14.0)
 ```
 
 
-##### 2、Sourcetree TortoiseGit 等工具提交
-如果是用 Sourcetree TortoiseGit 等工具提交，husky 是没法捕获到Git钩子的，所以也就无法使用 husky + commitlint 校验。
+##### 2、Sourcetree 工具提交
+如果是用 Sourcetree 提交，husky 是没法捕获到Git钩子的，所以也就无法使用 husky + commitlint 校验。
 
 这种提交方式推荐使用预定义模版，通过在commit时自动带出模版，然后编辑模版提交。以下三种方案可任选。
 
@@ -87,10 +89,10 @@ git config --global commit.template ~/.gittemplate
 cd WebApp
 git config commit.template ~/.gittemplate
 
-# 使用 Sourcetree 或 TortoiseGit 工具进行一次 commit
+# 使用 Sourcetree 进行一次 commit
 # 看看是否会自动带出git模版 如果有表示成功
 ```
 
 2、使用输入法的自定义短语功能，自定义快捷键，把上面的git模版copy进去，使用时键入快捷键自动带出模版。
 
-3、使用 VScode 的 Snippets 代码片段功能，自定义快捷键，把上面的git模版copy进去，使用时键入快捷键自动带出模版，编辑好之后再粘贴到 Sourcetree 或 TortoiseGit 的 commit 编辑框。
+3、使用 VScode 的 Snippets 代码片段功能，自定义快捷键，把上面的git模版copy进去，使用时键入快捷键自动带出模版，编辑好之后再粘贴到 Sourcetree 的 commit 编辑框。
